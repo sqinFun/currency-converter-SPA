@@ -17,7 +17,7 @@ export default class Router {
   }
 
   set activeRoute(selectedRoute) {
-    this._activeRoute = _utils.clone(selectedRoute)
+    this._activeRoute = $utils.clone(selectedRoute)
     this._appendComponent(selectedRoute)
   }
 

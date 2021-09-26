@@ -1,6 +1,8 @@
 import Router from './router'
 import utils from './utils'
-
+import api from './api'
+import 'normalize.css'
+import './css/style.css'
 
 
 let routList = [
@@ -24,5 +26,6 @@ let routList = [
   }
 ]
 
-window._utils = utils
+window.$utils = utils
+window.$api = api
 window.Router = new Router(routList)

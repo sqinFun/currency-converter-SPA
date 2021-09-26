@@ -1,0 +1,29 @@
+.feature-list-wrap {
+  display: flex;
+  flex-direction: column;
+}
+.feature-list {
+  display: flex;
+  flex-direction: column;
+  max-width: 500px;
+} 
+
+.feature-list__item {
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid #000;
+  padding: 5px 10px;
+  margin-bottom: 10px;
+}
+
+.feature-list__item-content {
+  display: flex;
+  justify-content: space-between;
+  flex-grow: 1;
+}
+
+.feature-list__control {
+  display: flex;
+  align-items: center;
+  padding-left: 10px
+}
