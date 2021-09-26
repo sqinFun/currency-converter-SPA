@@ -1,6 +1,7 @@
 export default class Router {
   constructor(routeList, initRoute) {
     this._activeRoute = null
+    this._jsScripts = {}
     this.routeList = routeList
 
     this._watchRouterUpdate()
@@ -17,7 +18,7 @@ export default class Router {
 
   set activeRoute(selectedRoute) {
     this._activeRoute = _utils.clone(selectedRoute)
-    this._appendRout(selectedRoute)
+    this._appendComponent(selectedRoute)
   }
 
   open({name, link, addToHistory = true}) {
@@ -45,17 +46,36 @@ export default class Router {
     this.open({ name: '404', addToHistory: false })
   }
 
-  _appendRout(selectedRoute) {
+  _appendPage(selectedRoute) {
     const appSelector = document.querySelector('#app')
-    const titleSelector = document.querySelector('title')
-
-    titleSelector.innerHTML = selectedRoute.title
     try {
       const page = require(`./${selectedRoute.path}/page.html`).default
       appSelector.innerHTML = page
     } catch(err) {
       this._show404()
     }
+  }
+
+  _appendPageScripts(selectedRoute) {
+    try {
+      const jsScripts = require(`./${selectedRoute.path}/index.js`).default
+      if (jsScripts) this._jsScripts = new jsScripts
+    } catch (err) {
+      if (err.code === 'MODULE_NOT_FOUND')
+        return
+
+      throw err
+    }
+  }
+
+  _appendComponent(selectedRoute) {
+    const titleSelector = document.querySelector('title')
+    titleSelector.innerHTML = selectedRoute.title
+
+    this._callDestroyPageScripts()
+    this._appendPage(selectedRoute)
+    this._appendPageScripts(selectedRoute)
+    this._callMountPageScripts()
   }
 
   _findRouteByName(routeName) {
@@ -71,5 +91,14 @@ export default class Router {
       e.preventDefault()
       this._loadSelectedLink()
     });
+  }
+
+  _callMountPageScripts() {
+    this._jsScripts.mounted?.()
+  }
+
+  _callDestroyPageScripts() {
+    this._jsScripts.destroy?.()
+    this._jsScripts = {}
   }
 }
