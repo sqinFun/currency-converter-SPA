@@ -25,5 +25,15 @@
 .feature-list__control {
   display: flex;
   align-items: center;
-  padding-left: 10px
+  padding-left: 10px;
+}
+
+.feature-icon {
+  color: #c4c4c4;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.feature-icon._active {
+  color: #f0dc28;
 }
