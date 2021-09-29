@@ -13,12 +13,12 @@ export default class indexPage {
     if(!this.currencyList?.length)
       await this.fetchCurrencyList()
 
-    this.appendCourses()
+    this.appendCurrencyItems()
     this.currencyNodeItems = document.querySelectorAll('.currency-toggle-feature')
     this.watchToggleFeature()
   }
 
-  appendCourses() {
+  appendCurrencyItems() {
     const nodeFeatureCurrencyList = []
     const nodeCurrencyList = []
     this.currencyList.forEach(currency => {
