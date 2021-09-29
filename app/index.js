@@ -2,6 +2,7 @@ import Router from './router'
 import utils from './utils'
 import api from './api'
 import 'normalize.css'
+import './css/ui-style.css'
 import './css/style.css'
 
 

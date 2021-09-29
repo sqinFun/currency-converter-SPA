@@ -47,7 +47,7 @@ export default class Router {
   }
 
   _appendPage(selectedRoute) {
-    const appSelector = document.querySelector('#app')
+    const appSelector = document.querySelector('#content')
     try {
       const page = require(`./${selectedRoute.path}/page.html`).default
       appSelector.innerHTML = page

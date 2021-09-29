@@ -1,19 +1,18 @@
-<div>
-  <div>Конвертер</div>
+<div class="content-block">
+  <h2>Конвертер</h2>
   <div id="currency-converter" class="converter">
     <div id="converter-from" class="dependent-input" class="converter__col">
-      <select id="converter-type-from" class="dependent-input__select" name="" id="">
+      <select id="converter-type-from" class="ui-select dependent-input__select" name="" id="">
         <option disabled selected>Выберите валюту</option>
       </select>
-      <input id="converter-input-from"  class="dependent-input__input" type="number">
+      <input id="converter-input-from"  class="ui-input dependent-input__input" type="number">
     </div>
     <div class="converter__icon"> ↔ </div>
     <div id="converter-to" class="dependent-input" class="converter__col">
-      <select id="converter-type-to" class="dependent-input__select" name="" id="">
+      <select id="converter-type-to" class="ui-select dependent-input__select" name="" id="">
         <option disabled selected>Выберите валюту</option>
       </select>
-      <input id="converter-input-to" class="dependent-input__input" type="number">
+      <input id="converter-input-to" class="ui-input dependent-input__input" type="number">
     </div>
   </div>
-  <button onClick="Router.open({name: 'index'})">Go to</button>
 </div>

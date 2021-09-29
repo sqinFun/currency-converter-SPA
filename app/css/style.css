@@ -1,19 +1,74 @@
-.feature-list-wrap {
+html {
+  font-family: 'Roboto', sans-serif;
+  font-size: .9rem;
+}
+
+body {
+  background: #EFF1F8;
+  display: grid;
+  min-height: 100vh;
+  align-content: start;
+}
+
+.content-block {
   display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  padding: 20px;
+  background-color: #FFF;
+  border-radius: 10px;
+}
+
+.header {
+  display: flex;
+  flex-grow: 1;
+  margin-bottom: 40px;
+}
+
+.menu {
+  margin: 0 -10px;
+  display: flex;
+  justify-content: flex-end;
+  flex-grow: 1;
+  border-radius: 0 0 10px 10px
+}
+
+.menu__item {
+  margin: 0 10px;
+  padding: 10px 20px;
+  background-color: #FFF;
+  border-radius: 0 0 10px 10px;
+  cursor: pointer;
+  transition: background-color .1s
+}
+
+.menu__item:hover {
+  background-color: #fafafa
+}
+
+.default-layout {
+  display: grid;
+  max-width: 800px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.feature-list-wrap {
+  display: grid;
   flex-direction: column;
 }
 .feature-list {
   display: flex;
   flex-direction: column;
-  max-width: 500px;
 } 
 
 .feature-list__item {
   display: flex;
   justify-content: space-between;
-  border: 1px solid #000;
   padding: 5px 10px;
   margin-bottom: 10px;
+  border-radius: 10px;
+  background: #EFF1F8;
 }
 
 .feature-list__item-content {
@@ -37,7 +92,6 @@
 .feature-icon._active {
   color: #f0dc28;
 }
-
 
 
 .converter {

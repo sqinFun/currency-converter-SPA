@@ -1,0 +1,26 @@
+*, *::after, *::before {
+  box-sizing: border-box;
+}
+
+h2, .h2 {
+  font-size: 1.7rem;
+  font-weight: 500;
+  color: #9b9b9b;
+  margin-bottom: 20px;
+  margin-top: 0;
+}
+
+.ui-select, .ui-input {
+  height: 44px;
+  padding: 5px 10px;
+  border-radius: 4px;
+  box-shadow: none;
+  outline: none;
+  border: none;
+  background: #EFF1F8;
+}
+
+.ui-select:focus,
+.ui-input:focus {
+  outline: 1px solid #007bff;
+}
