@@ -1,6 +1,6 @@
 import store from '_store'
 
-export default class indexPage {
+export default class IndexPage {
   currencies = {}
   nodeCurrency = document.querySelector('#exchange-rates')
   nodeFeatureCurrency = document.querySelector('#feature-exchange-rates')
