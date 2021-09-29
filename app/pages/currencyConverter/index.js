@@ -1,5 +1,5 @@
 
-import store from 'store'
+import store from '_store'
 
 const FROM_FIELD_NAME = 'from'
 const TO_FIELD_NAME = 'to'
@@ -7,7 +7,7 @@ const TO_FIELD_NAME = 'to'
 const DEFAULT_CURRENCY_CODE_FROM = 'RUB'
 const DEFAULT_CURRENCY_CODE_TO = 'USD'
 export default class CurrencyConverter {
-  currencyList = []
+  currencyList = store.currency.currencyList || []
   optionList = []
   selectNodes = {
     from: document.querySelector('#converter-type-from'),

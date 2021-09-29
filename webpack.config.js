@@ -6,7 +6,7 @@ module.exports = {
   entry: './app/index.js',
   resolve: {
     alias: {
-      store: path.resolve(__dirname, 'app/store/'),
+      '_store': path.resolve(__dirname, 'app/store/'),
     },
   },
   module: {

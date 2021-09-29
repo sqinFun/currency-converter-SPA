@@ -1,10 +1,10 @@
-import store from 'store'
+import store from '_store'
 
 export default class indexPage {
   currencies = {}
   nodeCurrency = document.querySelector('#exchange-rates')
   nodeFeatureCurrency = document.querySelector('#feature-exchange-rates')
-  currencyList = []
+  currencyList = store.currency.currencyList || []
   featureCurrencyCode = this.getFeatureCurrencyCode() || []
   currencyNodeItems = null
   bindedToggleFeatureCurrency = this.toggleFeatureCurrency.bind(this)

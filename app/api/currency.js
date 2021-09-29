@@ -1,5 +1,3 @@
-import mockCurrency from "./mockCurrency"
-
 // В апишке не было рубля
 // Так конечно делать не стоит
 const RUBCurrency = {
@@ -14,9 +12,8 @@ const RUBCurrency = {
 
 export default {
   async getExchangeRates() {
-    // const response = await fetch('https://www.cbr-xml-daily.ru/daily_json.js')
-    // const { Valute } = await response.json()
-    const { Valute } = mockCurrency
+    const response = await fetch('https://www.cbr-xml-daily.ru/daily_json.js')
+    const { Valute } = await response.json()
     return {...Valute, RUB: RUBCurrency }
   }
 }
