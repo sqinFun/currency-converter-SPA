@@ -37,3 +37,26 @@
 .feature-icon._active {
   color: #f0dc28;
 }
+
+
+
+.converter {
+  display: grid;
+  grid-template-columns: 1fr 50px 1fr;
+  grid-gap: 5px;
+}
+
+.converter__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dependent-input {
+  display: flex;
+  flex-direction: column;
+}
+
+.dependent-input__input {
+  margin-top: 20px
+}

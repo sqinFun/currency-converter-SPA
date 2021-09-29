@@ -1,4 +1,4 @@
-import store from '../../store/index'
+import store from 'store'
 
 export default class indexPage {
   currencies = {}
@@ -19,9 +19,10 @@ export default class indexPage {
     const nodeFeatureCurrencyList = []
     const nodeCurrencyList = []
     this.currencyList.forEach(currency => {
+      let currencyUnitCost = currency.Value / currency.Nominal
       let nodeCurrencyItem = this.getCurrencyItem({ 
         name: currency.Name,
-        value: currency.Value,
+        currencyUnitCost: currencyUnitCost.toFixed(2),
         code: currency.CharCode,
         isFeature: this.featureCurrencyCode.includes(currency.CharCode)
        })
@@ -70,12 +71,12 @@ export default class indexPage {
     return $utils.getLocalStorage('feature-currency-code')
   }
 
-  getCurrencyItem({name, value, code, isFeature}) {
+  getCurrencyItem({name, currencyUnitCost, code, isFeature}) {
     return `
     <div class="feature-list__item currency-item">
       <div class="feature-list__item-content">
         <p class="feature-list__name">${name}:</p>
-        <p class="feature-list__value">${value}<span> руб.</span></p>
+        <p class="feature-list__value">${currencyUnitCost}<span> руб.</span></p>
       </div>
       <div class="feature-list__control">
         <div data-currency-code="${code}" class="feature-icon currency-toggle-feature ${isFeature ? '_active' : ''}">★</div>
