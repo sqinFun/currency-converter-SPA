@@ -26,6 +26,18 @@ export default class CurrencyConverter {
     to: 0,
   }
 
+  handleSetCurrencyType(fieldName, e) {
+    this.setCurrencyType(fieldName, e.target.value)
+  }
+  handleSetCurrencyValue(fieldName, e) {
+    this.setCurrencyValue(fieldName, e.target.value)
+  }
+  bindedHandleSetCurrencyTypeFrom = this.handleSetCurrencyType.bind(this, FROM_FIELD_NAME)
+  bindedHandleSetCurrencyTypeTo = this.handleSetCurrencyType.bind(this, TO_FIELD_NAME)
+  bindedHandleSetCurrencyValueFrom = this.handleSetCurrencyValue.bind(this, FROM_FIELD_NAME)
+  bindedHandleSetCurrencyValueTo = this.handleSetCurrencyValue.bind(this, TO_FIELD_NAME)
+
+
   async mounted() {
     if(!this.currencyList?.length)
       await this.fetchCurrencyList()
@@ -65,19 +77,28 @@ export default class CurrencyConverter {
     this.setConvertValue(FROM_FIELD_NAME)
   }
 
-  watchUpdateCurrencyType() {
-    this.selectNodes.from.addEventListener('change', (e) => this.setCurrencyType(FROM_FIELD_NAME, e.target.value))
-    this.selectNodes.to.addEventListener('change', (e) => this.setCurrencyType(TO_FIELD_NAME, e.target.value))
-  }
-
   setCurrencyValue(targetField, value) {
     this.currencyValue[targetField] = value
     this.setConvertValue(targetField)
   }
 
+  watchUpdateCurrencyType() {
+    this.selectNodes.from.addEventListener('change', this.bindedHandleSetCurrencyTypeFrom)
+    this.selectNodes.to.addEventListener('change', this.bindedHandleSetCurrencyTypeTo)
+  }
+
   watchUpdateCurrencyValue() {
-    this.inputNodes.from.addEventListener('input', (e) => this.setCurrencyValue(FROM_FIELD_NAME, e.target.value))
-    this.inputNodes.to.addEventListener('input', (e) => this.setCurrencyValue(TO_FIELD_NAME, e.target.value))
+    this.inputNodes.from.addEventListener('input', this.bindedHandleSetCurrencyValueFrom)
+    this.inputNodes.to.addEventListener('input', this.bindedHandleSetCurrencyValueTo)
+  }
+
+  unwatchUpdateCurrencyType() {
+    this.selectNodes.from.removeEventListener('change', this.bindedHandleSetCurrencyTypeFrom)
+    this.selectNodes.to.removeEventListener('change', this.bindedHandleSetCurrencyTypeTo)
+  }
+  unwatchUpdateCurrencyValue() {
+    this.inputNodes.from.removeEventListener('input', this.bindedHandleSetCurrencyValueFrom)
+    this.inputNodes.to.removeEventListener('input', this.bindedHandleSetCurrencyValueTo)
   }
 
   getConvertCurrency({selectedCurrencyValue, fromCurrency, toCurrency}) {
@@ -99,5 +120,10 @@ export default class CurrencyConverter {
     })
 
     this.inputNodes[calculatedField].value = this.currencyValue[calculatedField]
+  }
+
+  destroy() {
+    this.unwatchUpdateCurrencyType()
+    this.unwatchUpdateCurrencyValue()
   }
 }

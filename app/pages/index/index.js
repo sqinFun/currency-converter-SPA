@@ -5,13 +5,16 @@ export default class indexPage {
   nodeCurrency = document.querySelector('#exchange-rates')
   nodeFeatureCurrency = document.querySelector('#feature-exchange-rates')
   currencyList = []
-  featureCurrencyCode = this.featureCurrencyCode() || []
+  featureCurrencyCode = this.getFeatureCurrencyCode() || []
+  currencyNodeItems = null
+  bindedToggleFeatureCurrency = this.toggleFeatureCurrency.bind(this)
 
   async mounted() {
     if(!this.currencyList?.length)
       await this.fetchCurrencyList()
 
     this.appendCourses()
+    this.currencyNodeItems = document.querySelectorAll('.currency-toggle-feature')
     this.watchToggleFeature()
   }
 
@@ -56,9 +59,14 @@ export default class indexPage {
   }
 
   watchToggleFeature() {
-    let currencyItem = document.querySelectorAll('.currency-toggle-feature')
-    currencyItem.forEach(currency => {
-      currency.addEventListener('click', (e) => this.toggleFeatureCurrency(e))
+    this.currencyNodeItems.forEach(currency => {
+      currency.addEventListener('click', this.bindedToggleFeatureCurrency)
+    })
+  }
+
+  unwatchToggleFeature() {
+    this.currencyNodeItems.forEach(currency => {
+      currency.removeEventListener('click', this.bindedToggleFeatureCurrency)
     })
   }
 
@@ -67,7 +75,7 @@ export default class indexPage {
     this.currencyList = store.currency.currencyList
   }
 
-  featureCurrencyCode() {
+  getFeatureCurrencyCode() {
     return $utils.getLocalStorage('feature-currency-code')
   }
 
@@ -83,5 +91,9 @@ export default class indexPage {
       </div>
     </div>
     `
+  }
+
+  destroy() {
+    this.unwatchToggleFeature()
   }
 }
